@@ -199,6 +199,12 @@ form.addEventListener('submit', async (event) => {
 newPasswordInput.addEventListener('input', validateForm);
 confirmPasswordInput.addEventListener('input', validateForm);
 
+// Clear fields aggressively on load to prevent stubborn autofills
+setTimeout(() => {
+  newPasswordInput.value = '';
+  confirmPasswordInput.value = '';
+}, 50);
+
 setFormEnabled(false);
 showStatus('Checking reset link...', 'info');
 bootstrapRecoverySession();

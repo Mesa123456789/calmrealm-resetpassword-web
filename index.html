@@ -11,38 +11,33 @@
   </head>
   <body>
     <main id="app" class="page-shell" aria-live="polite">
-      <section class="reset-panel" aria-labelledby="reset-title">
-        <div class="brand" aria-label="Calm Realm">
-          <span class="brand-mark" aria-hidden="true">C</span>
-          <span>Calm Realm</span>
-        </div>
-
-        <div class="mailbox" aria-hidden="true">
-          <svg viewBox="0 0 180 110" role="img">
-            <path class="mailbox-body" d="M66 31h56c18 0 33 15 33 33v28H66z" />
-            <path class="mailbox-lid" d="M66 31c19 0 35 15 35 33v28H45V52c0-12 9-21 21-21z" />
-            <path class="mailbox-flag" d="M48 61H22c-7 0-12-5-12-12s5-12 12-12h28" />
-            <path class="mailbox-post" d="M117 92v17M147 92v17" />
-            <path class="mailbox-mouth" d="M45 76c-18 1-31 5-36 11 16 4 31 1 45-8z" />
-            <path class="envelope" d="M30 44h57v38H30z" />
-            <path class="envelope-line" d="M31 45l28 23 28-23M31 82l20-20M87 82L67 62" />
-          </svg>
-        </div>
-
-        <h1 id="reset-title">Reset password</h1>
+      <div class="reset-container">
+        <!-- Title image – now inside the card -->
+        <img src="/UX/group_1507.png" alt="Reset Password" class="title-image" />
 
         <div id="status" class="status" role="status" hidden></div>
 
-        <form id="reset-form" class="reset-form" novalidate>
-          <div class="field-group">
-            <label for="new-password">New password</label>
+        <form id="reset-form" class="reset-form" autocomplete="off" novalidate>
+          <!-- Dummy fields to trick browser autofill -->
+          <input type="text" style="display:none" aria-hidden="true" autocomplete="username">
+          <input type="password" style="display:none" aria-hidden="true" autocomplete="current-password">
+
+          <!-- New Password field -->
+          <div class="field-wrapper">
+            <label for="new-password" class="sr-only">New password</label>
             <div class="password-field">
+              <div class="field-icon" aria-hidden="true">
+                <img src="/UX/Exclude.png" alt="" width="22" height="22" />
+              </div>
+              <span class="field-label">New password</span>
+              <div class="field-divider"></div>
               <input
                 id="new-password"
                 name="newPassword"
                 type="password"
                 minlength="6"
                 autocomplete="new-password"
+                placeholder="Enter new password"
                 required
               />
               <button
@@ -52,21 +47,25 @@
                 data-toggle-password="new-password"
               ></button>
             </div>
-            <div class="password-meter" aria-hidden="true">
-              <span></span><span></span><span></span><span></span>
-            </div>
             <p class="field-error" id="new-password-error"></p>
           </div>
 
-          <div class="field-group">
-            <label for="confirm-password">Confirm new password</label>
+          <!-- Confirm Password field -->
+          <div class="field-wrapper">
+            <label for="confirm-password" class="sr-only">Confirm new password</label>
             <div class="password-field">
+              <div class="field-icon" aria-hidden="true">
+                <img src="/UX/Exclude-1.png" alt="" width="22" height="22" />
+              </div>
+              <span class="field-label">Confirm password</span>
+              <div class="field-divider"></div>
               <input
                 id="confirm-password"
                 name="confirmPassword"
                 type="password"
                 minlength="6"
                 autocomplete="new-password"
+                placeholder="Confirm password"
                 required
               />
               <button
@@ -80,10 +79,10 @@
           </div>
 
           <button id="submit-button" class="submit-button" type="submit">
-            Update password
+            <span class="sr-only">Update password</span>
           </button>
         </form>
-      </section>
+      </div>
     </main>
 
     <script type="module" src="/src/main.js"></script>
