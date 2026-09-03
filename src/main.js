@@ -143,12 +143,10 @@ async function bootstrapRecoverySession() {
 
   try {
     if (recovery.code) {
-      await supabase.auth.signOut();
       const { error } = await supabase.auth.exchangeCodeForSession(recovery.code);
       if (error) throw error;
       hasRecoverySession = true;
     } else if (recovery.accessToken && recovery.refreshToken) {
-      await supabase.auth.signOut();
       const { error } = await supabase.auth.setSession({
         access_token: recovery.accessToken,
         refresh_token: recovery.refreshToken,
