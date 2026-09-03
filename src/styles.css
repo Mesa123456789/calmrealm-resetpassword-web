@@ -169,6 +169,12 @@ body {
   min-width: 0;
 }
 
+/* Hide Edge's default password reveal icon */
+.password-field input::-ms-reveal,
+.password-field input::-ms-clear {
+  display: none;
+}
+
 .password-field input::placeholder {
   color: #c4b898;
   font-weight: 600;
