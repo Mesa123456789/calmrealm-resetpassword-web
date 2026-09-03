@@ -126,7 +126,7 @@ async function bootstrapRecoverySession() {
   supabase = createClient(supabaseUrl, supabaseAnonKey);
 
   supabase.auth.onAuthStateChange((event, session) => {
-    if ((event === 'PASSWORD_RECOVERY' || session?.user) && !hasRecoverySession) {
+    if (event === 'PASSWORD_RECOVERY' && !hasRecoverySession) {
       hasRecoverySession = true;
       clearStatus();
       setFormEnabled(true);
@@ -143,10 +143,12 @@ async function bootstrapRecoverySession() {
 
   try {
     if (recovery.code) {
+      await supabase.auth.signOut();
       const { error } = await supabase.auth.exchangeCodeForSession(recovery.code);
       if (error) throw error;
       hasRecoverySession = true;
     } else if (recovery.accessToken && recovery.refreshToken) {
+      await supabase.auth.signOut();
       const { error } = await supabase.auth.setSession({
         access_token: recovery.accessToken,
         refresh_token: recovery.refreshToken,
@@ -191,6 +193,7 @@ form.addEventListener('submit', async (event) => {
     return;
   }
 
+  await supabase.auth.signOut();
   form.reset();
   setFormEnabled(false);
   showStatus('Password updated. Please return to Calm Realm and sign in again.', 'success');
