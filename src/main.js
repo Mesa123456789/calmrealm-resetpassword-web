@@ -56,7 +56,7 @@ document.querySelectorAll('[data-toggle-password]').forEach((button) => {
 function setLoading(nextLoading) {
   isLoading = nextLoading;
   submitButton.disabled = nextLoading || !hasRecoverySession;
-  submitButton.textContent = nextLoading ? 'Updating...' : 'Update password';
+  submitButton.innerHTML = `<span class="sr-only">${nextLoading ? 'Updating...' : 'Update password'}</span>`;
 }
 
 function showStatus(message, type = 'info') {
